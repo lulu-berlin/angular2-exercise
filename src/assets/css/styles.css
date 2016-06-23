@@ -47,6 +47,12 @@ body {
     overflow: hidden;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgAAAAgABAMAAAAS/+UFAAAAJ1BMV…+0wTBGFmZ4wfkSAHKjI54XQJy0awzffr1T4xtd1EkksR3xf88Q7hpDkPwQAAAAAElFTkSuQmCC);
     background-size: 100% auto;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 html {

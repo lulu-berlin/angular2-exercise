@@ -1,11 +1,16 @@
 <h2 align="center"><b>{{ title | async }}</b></h2>
-<p *ngFor="let p of paragraphs | async; let i=index">
-  <template ngFor let-w [ngForOf]="p">
+<p *ngFor="let p of paragraphs | async; let nP=index">
+  <template ngFor let-w [ngForOf]="p" let-i="index">
     <template [ngIf]="!playingQuiz">
-      <span [clickableWord]="w" (wordClicked)="wordClicked($event);">{{w}}</span>
+      <span [clickableWord]="{nParagraph:nP,nWord:i,word:w}" (wordClicked)="wordClicked($event);">{{w}}</span>
     </template>
-    <template [ngIf]="playingQuiz" ()>
-      {{w}}
+    <template [ngIf]="playingQuiz">
+      <template [ngIf]="nP==wordData.nParagraph && i==wordData.nWord">
+        <span class="hide-word">{{w}}</span>
+      </template>
+      <template [ngIf]="!(nP==wordData.nParagraph && i==wordData.nWord)">
+        {{w}}
+      </template>
     </template>
   </template>
 </p>

@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { TextService } from '../text.service';
 import { Observable } from 'rxjs/Observable';
-import { ClickableWord } from './clickable-word';
+import { ClickableWord, WordData } from './clickable-word';
 
 
 @Component({
@@ -23,6 +23,7 @@ export class TextReader {
     }
 
     @Input('playingQuiz') playingQuiz: boolean;
+    @Input('wordData') wordData: WordData;
     @Output() playQuiz = new EventEmitter();
 
     wordClicked(event) {

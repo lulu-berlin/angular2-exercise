@@ -1,12 +1,22 @@
 import { Directive, ElementRef, Renderer, Input, Output, HostListener, EventEmitter } from '@angular/core';
 
+export interface WordData {
+    nParagraph: number,
+    nWord: number,
+    word: string
+}
+
 @Directive({
     selector: '[clickableWord]'
 })
 export class ClickableWord {
     constructor(private element: ElementRef, private renderer: Renderer) {}
 
-    @Input('clickableWord') word: string;
+    @Input('clickableWord') wordData: WordData;
+
+    get word() {
+        return this.wordData.word;
+    }
 
     @Output('wordClicked') wordClicked = new EventEmitter();
 
@@ -47,9 +57,7 @@ export class ClickableWord {
     }
 
     @HostListener('click') onClick() {
-        this.wordClicked.emit({
-            word: this.word
-        })
+        this.wordClicked.emit(this.wordData);
     }
 
 }

@@ -31,3 +31,8 @@ h2 + p {
 p {
     margin: 0 0 20px 0;
 }
+
+.hide-word {
+    border-bottom: 5px solid black;
+    color: transparent;
+}
