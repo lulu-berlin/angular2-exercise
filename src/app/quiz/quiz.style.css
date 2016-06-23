@@ -1,0 +1,146 @@
+:host {
+    display: block;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding: 10px 6.25rem 0;
+    height: 45%;
+    border-top: 2px solid #5d69ba;
+    background-color: #151c50;
+    color: #fff;
+    font-family: "Bariol", sans-serif;
+    font-weight: 400;
+    font-size: 1.3rem;
+    border-bottom: 1px solid #fff;
+    border-top: 2px solid #5d69ba;
+    line-height: 1.4;
+}
+
+h1 {
+    font-size: 1.9rem;
+    font-weight: normal;
+    font-style: normal;
+    font-family: "Bariol", sans-serif;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 2rem;
+    line-height: 2;
+}
+
+.guessed {
+    display: table;
+    text-align: center;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.guessed span {
+    display: table-cell;
+    position: relative;
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin: 5px;
+    width: 1em;
+    height: 1.5em;
+    clear: both;
+    z-index: 1;
+    text-align: center;
+}
+
+.guessed span:before {
+    position: absolute;
+    content: "";
+    left: 25%;
+    bottom: 0;
+    width: 0.5em;
+    margin: 0 auto;
+    border-bottom: 2px solid white;
+}
+
+.letters {
+    text-align: center;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #fff;
+}
+
+.letters button {
+    margin-left: 10px;
+}
+
+
+
+.tab {
+    position: absolute;
+    bottom: 2rem;
+    right: 0;
+    padding: 10px 5.6rem 0 0;
+}
+
+.progress-button {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 45%;
+    min-width: 100px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.progress-button button {
+    display: block;
+    margin-left: 1rem;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 0;
+    width: 100px;
+    height: 3rem;
+    border: 2px solid #1ECD97;
+    border-radius: 40px;
+    background: transparent;
+    color: #1ECD97;
+    font-size: 1.5rem;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
+    transition: background-color 0.3s, color 0.3s, width 0.3s, border-width 0.3s, border-color 0.3s;
+}
+
+.progress-button button:hover {
+    background-color: #1ECD97;
+    color: #fff;
+}
+
+.progress-button button:focus {
+    outline: none;
+}
+
+.btn-circle {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    line-height: 1;
+    border: 1px solid #f5f5f5;
+    border-radius: 50%;
+    color: #f5f5f5;
+    text-align: center;
+    text-decoration: none;
+    background: rgba(0,0,0,0.0);
+    box-shadow: 0 0 3px gray;
+    font-weight: bold;
+    outline: 0;
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin: 10px auto 2rem auto;
+}
+
+.btn-circle:hover {
+    background: #1ECD97;
+}
+
+.btn-disabled {
+    color: #c0c0c0;
+    background-color: #fff;
+    cursor: default;
+    pointer-events: none;
+}

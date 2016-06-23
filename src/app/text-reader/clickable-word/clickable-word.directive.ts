@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Renderer, Input, HostListener } from '@angular/core';
+import { Directive, ElementRef, Renderer, Input, Output, HostListener, EventEmitter } from '@angular/core';
 
 @Directive({
     selector: '[clickableWord]'
@@ -7,6 +7,8 @@ export class ClickableWord {
     constructor(private element: ElementRef, private renderer: Renderer) {}
 
     @Input('clickableWord') word: string;
+
+    @Output('wordClicked') wordClicked = new EventEmitter();
 
     private isWord: boolean;
 
@@ -46,6 +48,9 @@ export class ClickableWord {
     }
 
     @HostListener('click') onClick() {
-        console.log(this.word);
+        this.wordClicked.emit({
+            word: this.word
+        })
     }
+
 }

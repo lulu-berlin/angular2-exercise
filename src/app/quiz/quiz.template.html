@@ -1,0 +1,25 @@
+<h1>Spell the missing word:</h1>
+
+<div class="guessed">
+    <span *ngFor="let l of guessedLetters; let i=index"
+          (click)="clickedGuess(i);">
+        {{ l == -1 ? ' ' : scrambledWord[l] }}
+    </span>
+</div>
+
+<div class="letters">
+    <button *ngFor="let l of scrambledWord; let i=index"
+            [class]="buttonState(i)"
+            (click)="clickedLetter(i);">
+        {{l}}
+    </button>
+</div>
+
+<div class="tab">
+    <div class="progress-button">
+        <button (click)="hint()">Hint</button>
+    </div>
+    <div class="progress-button">
+        <button (click)="check()">Check</button>
+    </div>
+</div>

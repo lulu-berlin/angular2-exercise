@@ -7,6 +7,7 @@ import { TextService } from './text.service';
 //import { Router } from "@angular/router";
 
 import { TextReader } from './text-reader';
+import { Quiz } from './quiz';
 
 /*
  * App Component
@@ -17,8 +18,11 @@ import { TextReader } from './text-reader';
   encapsulation: ViewEncapsulation.None,
   providers: [ TextService ],
   styleUrls: [ './app.style.css' ],
-  directives: [ TextReader ],
-  template: "<textReader></textReader>"
+  directives: [ TextReader, Quiz ],
+  template: `
+    <textReader [playingQuiz]="playingQuiz" (playQuiz)="playQuiz($event);"></textReader>
+    <quiz *ngIf="playingQuiz" [word]="quizWord"></quiz>
+  `
   /*template: `
     <nav>
       <span>
@@ -46,16 +50,19 @@ import { TextReader } from './text-reader';
   `*/
 })
 export class App {
-  name = 'Angular 2 Webpack Starter';
-  url = 'https://twitter.com/AngularClass';
+  playingQuiz: boolean = false;
+  quizWord: String;
 
-  constructor(private textService: TextService) {
-
-  }
+  constructor() {}
 
   ngOnInit() {
     //console.log('Initial App State', this.appState.state);
     //this.router.navigate(['home']);
+  }
+
+  playQuiz(event) {
+    this.playingQuiz = true;
+    this.quizWord = event.word.trim().replace(/^[^a-zA-Z]*(.*?)[^a-zA-Z]*$/, '$1');
   }
 
 }
