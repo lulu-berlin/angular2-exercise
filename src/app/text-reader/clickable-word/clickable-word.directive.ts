@@ -14,7 +14,6 @@ export class ClickableWord {
 
     ngAfterContentInit() {
         this.isWord = /[a-zA-Z]/.test(this.word);
-        console.log(this.isWord);
     }
 
     private underline() {

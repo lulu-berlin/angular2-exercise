@@ -159,12 +159,18 @@ h1 {
 
 .hint {
     color: yellow;
+    cursor: default;
+    pointer-events: none;
 }
 
 .correct, .score {
     color: #1ECD97;
+    cursor: default;
+    pointer-events: none;
 }
 
 .incorrect {
     color: red;
+    cursor: default;
+    pointer-events: none;
 }

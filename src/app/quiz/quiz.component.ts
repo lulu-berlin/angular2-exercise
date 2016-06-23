@@ -50,7 +50,10 @@ export class Quiz {
     }
 
     clickedLetter(clickedIndex: number) {
-        this.guessedLetters[this.guessedLetters.findIndex(i => i.index === -1)].index = clickedIndex;
+        let index = this.guessedLetters.findIndex(i => i.index === -1);
+        if (!this.checking && !this.guessedLetters[index].isHint) {
+            this.guessedLetters[index].index = clickedIndex;
+        }
     }
 
     private letterUsed(i: number) {

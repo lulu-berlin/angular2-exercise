@@ -9,9 +9,7 @@ export interface Text {
 
 @Injectable()
 export class TextService {
-  constructor(private http: Http) {
-    console.log("hello world from TextService!");
-  }
+  constructor(private http: Http) {}
 
   private text: Observable<Text>;
 
