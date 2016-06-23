@@ -9,7 +9,7 @@
     font-family: "Bariol Serif", serif;
     font-weight: 400;
     font-size: 1.1rem;
-    line-height: 1.5;
+    line-height: 2;
     overflow-y: scroll;
     margin-left: -16px;
     margin-right: -16px;
@@ -17,7 +17,7 @@
 }
 
 h2 {
-    font-size: .93rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 5em;
     font-family: "Bariol", sans-serif;
