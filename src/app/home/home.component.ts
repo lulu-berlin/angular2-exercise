@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { AppState } from '../app.service';
+import { TextService } from '../text.service';
 import { Title } from './title';
 import { XLarge } from './x-large';
 
@@ -29,18 +29,18 @@ export class Home {
   // Set our default values
   localState = { value: '' };
   // TypeScript public modifiers
-  constructor(public appState: AppState, public title: Title) {
+  constructor(private textService: TextService, public title: Title) {
 
   }
 
   ngOnInit() {
-    console.log('hello `Home` component');
+    console.log('textService');
     // this.title.getData().subscribe(data => this.data = data);
   }
 
   submitState(value) {
     console.log('submitState', value);
-    this.appState.set('value', value);
+    //this.appState.set('value', value);
     this.localState.value = '';
   }
 

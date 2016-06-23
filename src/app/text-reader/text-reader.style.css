@@ -1,0 +1,29 @@
+div {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 80px 6.25rem 0;
+    font-family: "Bariol Serif", serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    overflow-y: scroll;
+    margin-left: -16px;
+    margin-right: -16px;
+}
+
+h2 {
+    font-size: .93rem;
+    font-weight: 700;
+    margin-bottom: 5em;
+}
+
+h2 + p {
+    text-indent: 20px;
+}
+
+p {
+    margin: 0 0 20px 0;
+}

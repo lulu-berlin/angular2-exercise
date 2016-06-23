@@ -1,0 +1,8 @@
+<div class="text-reader">
+  <h2 align="center"><b>{{ title | async }}</b></h2>
+  <p *ngFor="let p of paragraphs | async; let i=index">
+    <template ngFor let-w [ngForOf]="p">
+      <span [clickableWord]="w">{{w}}</span>
+    </template>
+  </p>
+</div>
