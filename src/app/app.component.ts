@@ -4,7 +4,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { TextService } from './text.service';
-import { Router } from "@angular/router";
+//import { Router } from "@angular/router";
+
+import { TextReader } from './text-reader';
 
 /*
  * App Component
@@ -15,7 +17,9 @@ import { Router } from "@angular/router";
   encapsulation: ViewEncapsulation.None,
   providers: [ TextService ],
   styleUrls: [ './app.style.css' ],
-  template: `
+  directives: [ TextReader ],
+  template: "<textReader></textReader>"
+  /*template: `
     <nav>
       <span>
         <a [routerLink]=" ['./'] ">
@@ -39,13 +43,13 @@ import { Router } from "@angular/router";
     <main>
       <router-outlet></router-outlet>
     </main>
-  `
+  `*/
 })
 export class App {
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
 
-  constructor(private textService: TextService, private router: Router) {
+  constructor(private textService: TextService) {
 
   }
 
