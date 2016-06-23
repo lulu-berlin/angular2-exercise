@@ -48,6 +48,11 @@ h1 {
     text-align: center;
 }
 
+.guessed span:hover {
+    color: #000000;
+    background-color: #1ECD97;
+}
+
 .guessed span:before {
     position: absolute;
     content: "";
@@ -143,4 +148,23 @@ h1 {
     background-color: #fff;
     cursor: default;
     pointer-events: none;
+}
+
+.btn-hint {
+    color: #c0c0c0;
+    background-color: yellow;
+    cursor: default;
+    pointer-events: none;
+}
+
+.hint {
+    color: yellow;
+}
+
+.correct, .score {
+    color: #1ECD97;
+}
+
+.incorrect {
+    color: red;
 }

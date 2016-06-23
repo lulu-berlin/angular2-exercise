@@ -1,10 +1,15 @@
-import { Component, Input } from '@angular/core';
-import { BUTTON_DIRECTIVES } from 'ng2-bootstrap';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+
+interface GuessedLetter {
+    index: number, // index pointing to scrambledWord; -1 means not guessed yet
+    isHint: boolean
+}
 
 @Component({
     selector: 'quiz',
     providers: [ ],
-    directives: [ BUTTON_DIRECTIVES ],
+    directives: [ ],
+    viewProviders: [ ],
     pipes: [ ],
     styleUrls: [ './quiz.style.css' ],
     templateUrl: './quiz.template.html'
@@ -16,12 +21,17 @@ export class Quiz {
 
     scrambledWord: String[];
     
-    guessedLetters: Number[];
+    guessedLetters: GuessedLetter[];
+
+    checking: boolean = false;
+
+    @Output('done') done = new EventEmitter();
 
     ngOnInit() {
         // shuffle the letters
+        let wordLen = this.word.length;
         let wordArray = this.word.split('');
-        let i = this.word.length;
+        let i = wordLen;
         while (i > 0) {
             let j = Math.floor(Math.random() * i);
             i--;
@@ -31,26 +41,103 @@ export class Quiz {
         }
 
         this.scrambledWord = wordArray.map(c => c.toUpperCase());
-        this.guessedLetters = wordArray.map(() => -1);
+        this.guessedLetters = wordArray.map(() => {
+            return {
+                index: -1,
+                isHint: false
+            };
+        });
     }
 
     clickedLetter(clickedIndex: number) {
-        this.guessedLetters[this.guessedLetters.findIndex(i => i === -1)] = clickedIndex;
+        this.guessedLetters[this.guessedLetters.findIndex(i => i.index === -1)].index = clickedIndex;
+    }
+
+    private letterUsed(i: number) {
+        return this.guessedLetters.findIndex(x => x.index === i) !== -1;
+    }
+
+    private letterHinted(i: number) {
+        return this.guessedLetters.findIndex(x => x.index === i && x.isHint) !== -1;
     }
 
     buttonState(i: number): string {
-        return this.guessedLetters.indexOf(i) === -1 ? "btn-circle" : "btn-circle btn-disabled";
+        return !this.letterUsed(i) ? "btn-circle" :
+            this.letterHinted(i) ? "btn-circle btn-hint" : "btn-circle btn-disabled";
     }
 
-    clickedGuess(i: number) {
+    letterState(i: number): string {
+        return this.guessedLetters[i].isHint ? "hint" :
+            this.checking ? (this.scrambledWord[this.guessedLetters[i].index] === this.word[i].toUpperCase() ? "correct" :
+                "incorrect") :
+            "";
+    }
 
+    // remove a guessed letter
+    clickedGuess(i: number) {
+        this.guessedLetters[i].index = -1;
     }
 
     hint() {
-        console.log("hint");
+        let availableLetters = this.guessedLetters.map(g => g.index === -1);
+        let nAvailableLetters = availableLetters.filter(b => b).length;
+        let chosenLetter = Math.floor(Math.random() * nAvailableLetters) + 1;
+        console.log("hint: availableLetters = ", availableLetters);
+        console.log("hint: nAvailableLetters = ", nAvailableLetters);
+        console.log("hint: chosenLetter = ", chosenLetter);
+        // typescript isn't letting me use findIndex with a callback that includes the index (!)
+        // I have to resort to for loops.
+        let wordLen = this.word.length;
+        for (let i = 0; i < wordLen; i++) {
+            if (this.guessedLetters[i].index === -1) {
+                chosenLetter--;
+                if (chosenLetter === 0) {
+                    console.log("hint: i = ", i);
+                    let letter = this.word[i].toUpperCase();
+                    console.log(`hint: letter = '${letter}'`);
+                    for (let j = 0; j < wordLen; j++) {
+                        console.log("hint: j = ", j);
+                        console.log(`hint: scrambledWord[j] = ${this.scrambledWord[j]}`);
+                        console.log(`hint: letterUsed(j) = ${this.letterUsed(j)}`);
+                        if (this.scrambledWord[j] === letter && !this.letterUsed(j)) {
+                            this.guessedLetters[i] = {
+                                index: j,
+                                isHint: true
+                            };
+                            return;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     check() {
-        console.log('check');
+        if (this.checking) {
+            this.checking = false;
+            this.done.emit('');
+        }
+        else {
+            this.checking = true;
+        }
+    }
+
+    get score() {
+        let score = 0;
+        let wordLength = this.word.length;
+        for (let i = 0; i < wordLength; i++) {
+            console.log(`score: i = ${i}`);
+            let index = this.guessedLetters[i].index;
+            console.log(`score: index = ${index}`);
+            console.log(`score: guessedLetters[i].isHint = ${this.guessedLetters[i].isHint}`);
+            console.log(`score: scrambledWord[index] = ${this.scrambledWord[index]}`);
+            console.log(`score: word[i] = ${this.word[i]}`);
+            if (index !== -1 &&
+                !this.guessedLetters[i].isHint &&
+                this.scrambledWord[index] === this.word[i].toUpperCase()) {
+                score++;
+            }
+        }
+        return Math.round(score * 100 / wordLength);
     }
 }

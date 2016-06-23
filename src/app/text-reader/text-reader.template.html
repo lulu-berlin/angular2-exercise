@@ -4,7 +4,7 @@
     <template [ngIf]="!playingQuiz">
       <span [clickableWord]="w" (wordClicked)="wordClicked($event);">{{w}}</span>
     </template>
-    <template [ngIf]="playingQuiz">
+    <template [ngIf]="playingQuiz" ()>
       {{w}}
     </template>
   </template>
