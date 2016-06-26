@@ -23,7 +23,6 @@ export class Quiz {
      * One of the letter-buttons was clicked.
      */
     letterButtonClicked(i: number): void {
-        console.log("letterButtonClicked", i);
         if (!this.state.quizChecking) {
             if (!this.state.letterButtonUsed(i)) {
                 this.state.guessLetter(i);

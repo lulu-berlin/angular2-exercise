@@ -75,12 +75,10 @@ export class AppState {
 
         this.state.quiz = {
             scrambledWord:  wordArray.map(c => c.toUpperCase()),
-            guessedLetters: wordArray.map(() => {
-                return {
-                    index: -1,
-                    isHint: false
-                };
-            }),
+            guessedLetters: wordArray.map(() => ({
+                index: -1,
+                isHint: false
+            })),
             checking: false
         };
     }
