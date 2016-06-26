@@ -76,7 +76,6 @@ h1 {
 .tab {
     display: flex;
     float: right;
-    width: 215px;
 }
 
 .progress-button {
@@ -84,7 +83,6 @@ h1 {
     align-self: flex-end;
     position: relative;
     text-align: center;
-    width: 45%;
     min-width: 100px;
     margin-left: 0;
     margin-right: 0;
