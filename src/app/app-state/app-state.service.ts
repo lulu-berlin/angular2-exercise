@@ -135,6 +135,13 @@ export class AppState {
     removeGuess(i: number): void {
         this.state.quiz.guessedLetters[i].index = -1;
     }
+    
+    /*
+     * remove a guessed letter by clicking again on its button.
+     */
+    removeGuessByButton(i: number): void {
+        this.state.quiz.guessedLetters[this.state.quiz.guessedLetters.findIndex(g => g.index === i)].index = -1;
+    }
 
     /*
      * Was the letter guessed correctly?

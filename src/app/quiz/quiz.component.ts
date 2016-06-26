@@ -19,9 +19,18 @@ interface GuessedLetter {
 export class Quiz {
     constructor(private state: AppState) {}
 
-    letterButtonClicked(clickedIndex: number): void {
+    /*
+     * One of the letter-buttons was clicked.
+     */
+    letterButtonClicked(i: number): void {
+        console.log("letterButtonClicked", i);
         if (!this.state.quizChecking) {
-            this.state.guessLetter(clickedIndex);
+            if (!this.state.letterButtonUsed(i)) {
+                this.state.guessLetter(i);
+            }
+            else if (!this.state.letterButtonHinted(i)) {
+                this.state.removeGuessByButton(i);
+            }
         }
     }
 
@@ -30,7 +39,7 @@ export class Quiz {
      */
     buttonSelector(i: number): string {
         return !this.state.letterButtonUsed(i) ? "btn-circle" :
-            this.state.letterButtonHinted(i) ? "btn-circle btn-hint" : "btn-circle btn-disabled";
+            this.state.letterButtonHinted(i) ? "btn-circle btn-hint" : "btn-circle btn-used";
     }
 
     /*

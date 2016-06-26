@@ -141,7 +141,7 @@ h1 {
     background: #1ECD97;
 }
 
-.btn-disabled {
+.btn-used {
     color: #c0c0c0;
     background-color: #fff;
 }
@@ -151,7 +151,7 @@ h1 {
     background-color: yellow;
 }
 
-.btn-disabled, .bth-hint, .hint, .correct, .incorrect {
+.bth-hint, .hint, .correct, .incorrect {
     cursor: default;
     pointer-events: none;
 }
