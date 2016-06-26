@@ -57,6 +57,14 @@ export class AppState {
         return this.state.selectedWord.wordText.trim().replace(/^[^a-zA-Z]*(.*?)[^a-zA-Z]*$/, '$1');
     }
 
+    get nParagraph(): number {
+        return this.state.selectedWord.nParagraph;
+    }
+
+    get nWord(): number {
+        return this.state.selectedWord.nWord;
+    }
+
     startQuiz(wordData: Word): void {
         this.state.selectedWord = wordData;
 

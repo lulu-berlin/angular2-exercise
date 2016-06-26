@@ -10,11 +10,11 @@
 
     <template [ngIf]="state.playingQuiz">
 
-      <template [ngIf]="nP==state.selectedWord.nParagraph && i==state.selectedWord.nWord">
+      <template [ngIf]="nP==state.nParagraph && i==state.nWord">
         <span class="hide-word">{{w}}</span>
       </template>
 
-      <template [ngIf]="!(nP==state.selectedWord.nParagraph && i==state.selectedWord.nWord)">
+      <template [ngIf]="!(nP==state.nParagraph && i==state.nWord)">
         {{w}}
       </template>
 
