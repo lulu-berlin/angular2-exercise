@@ -1,29 +1,29 @@
 <h1>
     Spell the missing word:
-    <span class="score" *ngIf="checking">Your score is: {{score}}%</span>
+    <span class="score" *ngIf="state.quizChecking">Your score is: {{score}}%</span>
 </h1>
 
 <div class="guessed">
-    <span *ngFor="let l of guessedLetters; let i=index"
-          [class]="letterState(i)"
+    <span *ngFor="let l of state.guessedLetters; let i=index"
+          [class]="letterSelector(i)"
           (click)="clickedGuess(i);">
-        {{ l.index == -1 ? ' ' : scrambledWord[l.index] }}
+        {{l}}
     </span>
 </div>
 
 <div class="letters">
-    <button *ngFor="let l of scrambledWord; let i=index"
-            [class]="buttonState(i)"
-            (click)="clickedLetter(i);">
+    <button *ngFor="let l of state.scrambledWord; let i=index"
+            [class]="buttonSelector(i)"
+            (click)="letterButtonClicked(i);">
         {{l}}
     </button>
 </div>
 
 <div class="tab">
     <div class="progress-button">
-        <button *ngIf="!checking" (click)="hint()">Hint</button>
+        <button *ngIf="!state.quizChecking" (click)="state.hint()">Hint</button>
     </div>
     <div class="progress-button">
-        <button (click)="check()">{{checking ? "Done" : "Check"}}</button>
+        <button (click)="check()">{{state.quizChecking ? "Done" : "Check"}}</button>
     </div>
 </div>

@@ -73,18 +73,16 @@ h1 {
     margin-left: 10px;
 }
 
-
-
 .tab {
-    position: absolute;
-    bottom: 2rem;
-    right: 0;
-    padding: 10px 5.6rem 0 0;
+    display: flex;
+    float: right;
+    width: 215px;
 }
 
 .progress-button {
-    position: relative;
     display: inline-block;
+    align-self: flex-end;
+    position: relative;
     text-align: center;
     width: 45%;
     min-width: 100px;
@@ -146,31 +144,31 @@ h1 {
 .btn-disabled {
     color: #c0c0c0;
     background-color: #fff;
-    cursor: default;
-    pointer-events: none;
 }
 
 .btn-hint {
     color: #c0c0c0;
     background-color: yellow;
+}
+
+.btn-disabled, .bth-hint, .hint, .correct, .incorrect {
     cursor: default;
     pointer-events: none;
 }
 
 .hint {
     color: yellow;
-    cursor: default;
-    pointer-events: none;
 }
 
 .correct, .score {
     color: #1ECD97;
-    cursor: default;
-    pointer-events: none;
 }
 
 .incorrect {
     color: red;
-    cursor: default;
-    pointer-events: none;
 }
+
+.score {
+    float: right;
+}
+

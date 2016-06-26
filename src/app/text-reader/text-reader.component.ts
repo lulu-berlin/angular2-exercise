@@ -1,8 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { TextService } from '../text.service';
-import { Observable } from 'rxjs/Observable';
-import { ClickableWord, WordData } from './clickable-word';
+import { Component } from '@angular/core';
 
+import { AppState } from '../app-state';
+import { ClickableWord } from './clickable-word';
 
 @Component({
     selector: 'textReader',
@@ -13,20 +12,5 @@ import { ClickableWord, WordData } from './clickable-word';
     templateUrl: './text-reader.template.html'
 })
 export class TextReader {
-
-    title: Observable<String>;
-    paragraphs: Observable<String[][]>;
-
-    constructor(private textService: TextService) {
-        this.title = textService.textTitle;
-        this.paragraphs = textService.textParagraphs;
-    }
-
-    @Input('playingQuiz') playingQuiz: boolean;
-    @Input('wordData') wordData: WordData;
-    @Output() playQuiz = new EventEmitter();
-
-    wordClicked(event) {
-        this.playQuiz.emit(event);
-    }
+    constructor(private state: AppState) {}
 }

@@ -1,33 +1,18 @@
-import { Directive, ElementRef, Renderer, Input, Output, HostListener, EventEmitter } from '@angular/core';
+import { Directive, ElementRef, Input, HostListener } from '@angular/core';
 
-export interface WordData {
-    nParagraph: number,
-    nWord: number,
-    word: string
-}
+import { AppState, Word } from '../../app-state';
 
 @Directive({
     selector: '[clickableWord]'
 })
 export class ClickableWord {
-    constructor(private element: ElementRef, private renderer: Renderer) {}
+    constructor(private element: ElementRef, private state: AppState) {}
 
-    @Input('clickableWord') wordData: WordData;
-
-    get word() {
-        return this.wordData.word;
-    }
-
-    @Output('wordClicked') wordClicked = new EventEmitter();
-
-    private isWord: boolean;
-
-    ngAfterContentInit() {
-        this.isWord = /[a-zA-Z]/.test(this.word);
-    }
+    @Input('clickableWord') wordData: Word;
 
     private underline() {
-        if (this.isWord) {
+        // only underline if it is an actual word
+        if (/[a-zA-Z]/.test(this.wordData.wordText)) {
             this.element.nativeElement.style.borderBottom = '5px solid #3fd17f';
         }
     }
@@ -36,28 +21,16 @@ export class ClickableWord {
         this.element.nativeElement.style.borderBottom = '';
     }
 
-    @HostListener('mouseenter') onMouseEnter() {
-        this.underline();
-    }
-
-    @HostListener('touchstart') onTouchStart() {
-        this.underline();
-    }
-
-    @HostListener('mouseleave') onMouseLeave() {
-        this.removeUnderline();
-    }
-
-    @HostListener('touchend') onTouchEnd() {
-        this.removeUnderline()
-    }
-
-    @HostListener('touchcancel') onTouchCancel() {
-        this.removeUnderline()
-    }
+    @HostListener('mouseenter')  onMouseEnter()  { this.underline(); }
+    @HostListener('touchstart')  onTouchStart()  { this.underline(); }
+    @HostListener('mouseleave')  onMouseLeave()  { this.removeUnderline(); }
+    @HostListener('touchend')    onTouchEnd()    { this.removeUnderline(); }
+    @HostListener('touchcancel') onTouchCancel() { this.removeUnderline(); }
 
     @HostListener('click') onClick() {
-        this.wordClicked.emit(this.wordData);
+        // only start quiz if it is an actual word
+        if (/[a-zA-Z]/.test(this.wordData.wordText)) {
+            this.state.startQuiz(this.wordData);
+        }
     }
-
 }

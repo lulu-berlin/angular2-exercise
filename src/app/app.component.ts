@@ -1,37 +1,25 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { LocalStorageService } from "angular2-localstorage/LocalStorageEmitter";
+import { LocalStorage } from "angular2-localstorage/WebStorage";
+
 
 import { TextService } from './text.service';
 import { TextReader } from './text-reader';
 import { Quiz } from './quiz';
-import { WordData } from './text-reader/clickable-word'
+import { AppState } from './app-state';
 
 @Component({
   selector: 'app',
   encapsulation: ViewEncapsulation.None,
-  providers: [ TextService ],
+  providers: [ LocalStorageService, TextService, AppState ],
   styleUrls: [ './app.style.css' ],
   directives: [ TextReader, Quiz ],
   template: `
-    <textReader [playingQuiz]="playingQuiz" [wordData]="wordData" (playQuiz)="playQuiz($event);"></textReader>
-    <quiz *ngIf="playingQuiz" [word]="quizWord" (done)="donePlayingQuiz();"></quiz>
+    <textReader></textReader>
+    <quiz *ngIf="state.playingQuiz"></quiz>
   `
 })
 export class App {
-  playingQuiz: boolean = false;
-  quizWord: String = "";
-  wordData: WordData;
-
-  constructor() {}
-
-  playQuiz(event) {
-    this.playingQuiz = true;
-    this.wordData = event;
-    this.quizWord = this.wordData.word.trim().replace(/^[^a-zA-Z]*(.*?)[^a-zA-Z]*$/, '$1');
-  }
-
-  donePlayingQuiz() {
-    this.playingQuiz = false;
-    this.quizWord = "";
-  }
-
+  constructor(storageService: LocalStorageService, private state: AppState) {}
+  
 }
