@@ -56,7 +56,7 @@ export class Quiz {
         }
     }
 
-    check() {
+    check(): void {
         if (this.state.quizChecking) {
             this.state.reset();
         }
@@ -65,7 +65,7 @@ export class Quiz {
         }
     }
 
-    get score() {
+    get score(): number {
         let score = 0, wordLength = this.state.guessedLetters.length;
         for (let i = 0; i < wordLength; i++) {
             if (!this.state.letterHinted(i) && this.state.isCorrectlyGuessed(i)) {

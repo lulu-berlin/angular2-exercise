@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { AppState } from '../app-state';
 import { ClickableWord } from './clickable-word';
+import { TextService } from "../text.service";
 
 @Component({
     selector: 'textReader',
@@ -12,5 +13,5 @@ import { ClickableWord } from './clickable-word';
     templateUrl: './text-reader.template.html'
 })
 export class TextReader {
-    constructor(private state: AppState) {}
+    constructor(private state: AppState, private text: TextService) {}
 }

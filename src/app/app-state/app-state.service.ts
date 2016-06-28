@@ -1,15 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 
 import { LocalStorageService } from "angular2-localstorage/LocalStorageEmitter";
 import { LocalStorage } from "angular2-localstorage/WebStorage";
-
-import { TextService } from '../text.service';
-
-interface Text {
-    title: Observable<String>,
-    paragraphs: Observable<String[][]>
-}
 
 export interface Word {
     nParagraph: number,
@@ -29,41 +21,27 @@ interface QuizState {
 }
 
 interface State {
-    text: Text
     selectedWord?: Word,
     quiz?: QuizState
 }
 
 @Injectable()
 export class AppState {
-    constructor(storageService: LocalStorageService, private textService: TextService) {}
+    constructor(storageService: LocalStorageService) {}
 
-    text: Text = {
-        title:      this.textService.textTitle,
-        paragraphs: this.textService.textParagraphs
-    };
+    @LocalStorage() state: State = {};
 
-    @LocalStorage() state: State = { text: this.text };
+    reset(): void { this.state = {}; }
 
-    reset(): void {
-        this.state = { text: this.text };
-    }
-
-    get playingQuiz(): boolean {
-        return this.state.quiz !== undefined;
-    }
+    get playingQuiz(): boolean { return this.state.quiz !== undefined; }
 
     get selectedWord(): string {
         return this.state.selectedWord.wordText.trim().replace(/^[^a-zA-Z]*(.*?)[^a-zA-Z]*$/, '$1');
     }
 
-    get nParagraph(): number {
-        return this.state.selectedWord.nParagraph;
-    }
+    get nParagraph(): number { return this.state.selectedWord.nParagraph; }
 
-    get nWord(): number {
-        return this.state.selectedWord.nWord;
-    }
+    get nWord(): number { return this.state.selectedWord.nWord; }
 
     startQuiz(wordData: Word): void {
         this.state.selectedWord = wordData;
@@ -91,20 +69,15 @@ export class AppState {
         };
     }
 
-    get quizChecking(): boolean {
-        return this.state.quiz.checking;
-    }
-    set quizChecking(checking: boolean) {
-        this.state.quiz.checking = checking;
-    }
+    get quizChecking(): boolean         { return this.state.quiz.checking; }
+    set quizChecking(checking: boolean) { this.state.quiz.checking = checking; }
 
     get guessedLetters(): String[] {
-        return this.state.quiz.guessedLetters.map(i => i.index === -1 ? ' ' : this.state.quiz.scrambledWord[i.index]);
+        return this.state.quiz.guessedLetters
+            .map(i => i.index === -1 ? ' ' : this.state.quiz.scrambledWord[i.index]);
     }
 
-    get scrambledWord(): String[] {
-        return this.state.quiz.scrambledWord;
-    }
+    get scrambledWord(): String[] { return this.state.quiz.scrambledWord; }
 
     /*
      * Checks whether a letter-button (specified by its index) was already pressed.
@@ -123,9 +96,7 @@ export class AppState {
     /*
      * Checks whether a guessed letter (above; specified by its index) is a hint.
      */
-    letterHinted(i: number): boolean {
-        return this.state.quiz.guessedLetters[i].isHint;
-    }
+    letterHinted(i: number): boolean { return this.state.quiz.guessedLetters[i].isHint; }
 
     /*
      * User guessed a letter.
@@ -138,9 +109,7 @@ export class AppState {
     /*
      * Remove a guessed letter.
      */
-    removeGuess(i: number): void {
-        this.state.quiz.guessedLetters[i].index = -1;
-    }
+    removeGuess(i: number): void { this.state.quiz.guessedLetters[i].index = -1; }
     
     /*
      * remove a guessed letter by clicking again on its button.

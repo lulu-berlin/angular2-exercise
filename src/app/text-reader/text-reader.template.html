@@ -1,20 +1,20 @@
-<h2 align="center"><b>{{ state.text.title | async }}</b></h2>
+<h2 align="center"><b>{{ text.title }}</b></h2>
 
-<p *ngFor="let p of state.text.paragraphs | async; let nP=index">
+<p *ngFor="let p of text.paragraphs; let nP=index">
 
   <template ngFor let-w [ngForOf]="p" let-i="index">
 
     <template [ngIf]="!state.playingQuiz">
-      <span [clickableWord]="{nParagraph:nP,nWord:i,wordText:w}">{{w}}</span>
+      <span [clickableWord]="{ nParagraph: nP, nWord: i, wordText: w }">{{w}}</span>
     </template>
 
     <template [ngIf]="state.playingQuiz">
 
-      <template [ngIf]="nP==state.nParagraph && i==state.nWord">
+      <template [ngIf]="nP == state.nParagraph && i == state.nWord">
         <span class="hide-word">{{w}}</span>
       </template>
 
-      <template [ngIf]="!(nP==state.nParagraph && i==state.nWord)">
+      <template [ngIf]="!(nP == state.nParagraph && i == state.nWord)">
         {{w}}
       </template>
 
