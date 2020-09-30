@@ -1,6 +1,6 @@
 # angular2-exercise
 
-Spelling quiz.
+An amazing and stunning Spelling quiz.
 
 The build environment is based on
 [angular2-webpack-starter](https://github.com/AngularClass/angular2-webpack-starter).
